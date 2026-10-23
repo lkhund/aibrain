@@ -205,7 +205,10 @@ CREATE TABLE holidays (
 `;
 
 function databaseFile() {
-  return process.env.HR_DB_PATH || path.join(process.cwd(), 'data', 'hr.sqlite');
+  if (process.env.HR_DB_PATH) return process.env.HR_DB_PATH;
+  // Vercel functions can write only under /tmp. Each instance seeds its own copy.
+  if (process.env.VERCEL) return path.join('/tmp', 'hr.sqlite');
+  return path.join(process.cwd(), 'data', 'hr.sqlite');
 }
 
 function readVersion(db: Database.Database) {

@@ -41,7 +41,13 @@ export async function login(formData: FormData) {
     employeeId: row.employee_id,
   });
   const jar = await cookies();
-  jar.set(COOKIE, token, { httpOnly: true, sameSite: 'lax', path: '/', maxAge: 60 * 60 * 24 * 7 });
+  jar.set(COOKIE, token, {
+    httpOnly: true,
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 60 * 60 * 24 * 7,
+    secure: process.env.VERCEL === '1',
+  });
   redirect(next.startsWith('/w') ? next : '/w');
 }
 

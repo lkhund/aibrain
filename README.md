@@ -14,6 +14,8 @@ npm run dev
 
 Open http://localhost:3000 and sign in. Every demo password is `demo1234`.
 
+On Vercel the database file is created under `/tmp` and seeded when a function instance starts. Sign-in and the sample company work there. Edits live only as long as that instance does.
+
 | Role | Email |
 | --- | --- |
 | HR | nino@demo.ge |
